@@ -14,30 +14,27 @@ public class Environment : MonoBehaviour
 
     int num = 0;
     int rounds = 20;
-    int i;
 
-    void debug()
+    void help(int i)
     {
         Debug.Log(blocks[num]);
         Textblocks.text = blocks[num];
         num = Random.Range(0, blocks.Length);
         blocks2.Add(num);
-        i++;
         Debug.Log(i);
+        Debug.Log("Round" + i);
     }
 
     void BlockSpawn()
     {
-        for (i = 0; i < rounds;) //C# alt to 'for i in range'
+        for (int i = 0; i < rounds; i++) //C# alt to 'for i in range'
         {
             if (num == 0 && blocks2[i] == 0) //Checking if 'i' is equal to 0 (Pavement)
             {
-                debug();
-                Debug.Log("Round 1");
 
                 num = Random.Range(0, blocks.Length);
 
-                if (num == 0 && blocks2[i] == 0) //Checking if 'i' is equal to 0 (Pavement)
+                /*if (num == 0 && blocks2[i] == 0) //Checking if 'i' is equal to 0 (Pavement)
                 {
                     debug();
                     Debug.Log("Round 2");
@@ -56,33 +53,26 @@ public class Environment : MonoBehaviour
                 {
                     debug();
                     Debug.Log("Round 2");
-                }
+                }*/
                 //Then Pavement, Stairs, Road and TrafficLights can spawn
             }
             if (num == 1 && blocks2[i] == 1) //Stairs
             {
-                debug();
-                Debug.Log("Round 1");
                 //Then Pavement and Stairs can spawn
             }
             if (num == 2 && blocks2[i] == 2) //Road
             {
-                debug();
-                Debug.Log("Round 1");
                 //Then Pavement, Road, Bollard and TrafflicLights can spawn
             }
             if (num == 3 && blocks2[i] == 3) //Bollard
             {
-                debug();
-                Debug.Log("Round 1");
                 //Then ONLY Road can spawn
             }
             if (num == 4 && blocks2[i] == 4) //Traffic Lights
             {
-                debug();
-                Debug.Log("Round 1");
                 //Then ONLY Road can spawn
             }
+            help(i);
         }
         
     }
