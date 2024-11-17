@@ -7,11 +7,18 @@ public class Environment_Blocks
 {
     //int X_Position;
     //int Y_Position;
-    string Type
-
-    void Spawn()
+    string[] Type = { "Pavement", "Stairs", "Road", "Bollard", "TrafficLights" };
+    public GameObject blockprefab;
+    public MonoBehaviour behaviour;
+    public Environment_Blocks(GameObject Block_Prefab)
     {
-
+        blockprefab = Block_Prefab;
+    }
+    public void Spawn()
+    {
+        //behaviour.Instantiate(blockprefab, new Vector3(5.0f, 0, 0), Quaternion.identity);
+        Debug.Log("Spawn");
+        Debug.Log("WAAAAAHHHHH");
     }
 
     void Detector()
@@ -23,7 +30,6 @@ public class Environment_Blocks
 public class Environment : MonoBehaviour
 {
     public TMP_Text Textblocks;
-
     string[] blocks = {"Pavement", "Stairs", "Road", "Bollard", "TrafficLights"};
     List<int> blocks2 = new List<int>() {0, };
     //int[] blocks2 = {0,};
@@ -98,6 +104,8 @@ public class Environment : MonoBehaviour
     void Start()
     {
         Debug.Log("Hello World!");
+        Environment_Blocks environment_Blocks = new Environment_Blocks(Resources.Load<GameObject>("BlockPrefabs/PavementBlock"));
+        environment_Blocks.Spawn();
     }
 
     // Update is called once per frame
