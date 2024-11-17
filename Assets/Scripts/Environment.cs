@@ -3,6 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+public class Environment_Blocks
+{
+    //int X_Position;
+    //int Y_Position;
+    string Type
+
+    void Spawn()
+    {
+
+    }
+
+    void Detector()
+    {
+
+    }
+}
+
 public class Environment : MonoBehaviour
 {
     public TMP_Text Textblocks;
