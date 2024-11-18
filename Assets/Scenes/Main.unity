@@ -160,7 +160,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 10341269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4159d8453ab23e54c82f6829c38d9e5f, type: 3}
+  m_Script: {fileID: 11500000, guid: 84ed133f720778740b194f90d60b3461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Pavement_Prefab: {fileID: 6276866561324349375, guid: e49043c8dd42f0b4f8fd9acdeff23ef9, type: 3}
@@ -168,6 +168,7 @@ MonoBehaviour:
   Stair_Prefab: {fileID: 7572063483543386491, guid: 2995ecf783436f640829958763c58227, type: 3}
   Bollard_Prefab: {fileID: 7793592335823260199, guid: ab42a786c9810234c9d1103f5fa35183, type: 3}
   TrafficLight_Prefab: {fileID: 5473524892290554457, guid: c6ac64ec868aa8449a01c52cefb6c5a4, type: 3}
+  rounds: 10
 --- !u!1 &204734406
 GameObject:
   m_ObjectHideFlags: 0
