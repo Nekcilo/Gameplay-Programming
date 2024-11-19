@@ -168,7 +168,7 @@ MonoBehaviour:
   Stair_Prefab: {fileID: 7572063483543386491, guid: 2995ecf783436f640829958763c58227, type: 3}
   Bollard_Prefab: {fileID: 7793592335823260199, guid: ab42a786c9810234c9d1103f5fa35183, type: 3}
   TrafficLight_Prefab: {fileID: 5473524892290554457, guid: c6ac64ec868aa8449a01c52cefb6c5a4, type: 3}
-  rounds: 20
+  rounds: 10
 --- !u!1 &204734406
 GameObject:
   m_ObjectHideFlags: 0
