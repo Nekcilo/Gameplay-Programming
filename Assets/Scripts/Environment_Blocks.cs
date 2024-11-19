@@ -55,12 +55,12 @@ public class Environment_Blocks : MonoBehaviour
         switch(Previous)
         {
           case "Pavement":
-          block_num = Random.Range(0, 2);
+          block_num = Random.Range(0, 2); //not including stairs
           Spawn_Choice = PavementList[block_num];
           break;
 
           case "Road":
-          block_num = Random.Range(0, 2);
+          block_num = Random.Range(0, 3);
           Spawn_Choice = RoadList[block_num];
           break;
 
