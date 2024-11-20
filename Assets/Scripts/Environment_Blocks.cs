@@ -14,9 +14,8 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject TrafficLight_Prefab;
 
     //to keep track of the number + meaning
-    string[] Type = {"Pavement", "Road", "Bollard", "TrafficLights"}; //stairs not included
-
-    List<int> Spawned = new List<int>() {0,};
+    //string[] Type = {"Pavement", "Road", "Bollard", "TrafficLights"}; //stairs not included
+    //List<int> Spawned = new List<int>() {0,};
 
     List<string> PavementList = new List<string>() {"Pavement", "Road", "Stairs"};
     List<string> RoadList = new List<string>() {"Pavement", "Bollard", "TrafficLights"};
