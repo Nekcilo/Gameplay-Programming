@@ -13,6 +13,15 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject Bollard_Prefab;
     [SerializeField] private GameObject TrafficLight_Prefab;
 
+    //BoundingBox Info
+    [SerializeField] private GameObject BoundingBox;
+    [SerializeField] private GameObject BB_Left;
+    [SerializeField] private GameObject BB_Right;
+    float BB_X = 18f;
+    float BB_Y = 10f;
+    int StairsCount = 0;
+    private Vector3 scaleChange, positionChange;
+
     //to keep track of the number + meaning
     //string[] Type = {"Pavement", "Road", "Bollard", "TrafficLights"}; //stairs not included
     //List<int> Spawned = new List<int>() {0,};
@@ -106,6 +115,7 @@ public class Environment_Blocks : MonoBehaviour
           case "Stairs":
           Instantiate(Stair_Prefab, new Vector3(i * X_Position, Y_Position, 0), Quaternion.identity);
           Debug.Log("Spawn Stairs");
+          StairsCount++;
           break;
 
           default:
@@ -214,6 +224,28 @@ public class Environment_Blocks : MonoBehaviour
         //Randomize(i);
         i++;
       }
+      //Main BoundingBox, To stop the camera
+      //Scales horizontally with the level blocks, scales vertically from the amount of stairs that spawn
+      //Moves Horizontally to be centred with the level
+        scaleChange = new Vector3(((rounds - 1) * BB_X), (StairsCount * BB_Y), 0f);
+        positionChange = new Vector3(((rounds - 1) * (BB_X / 2)), (StairsCount * (BB_Y / 2)), 0f); //has to be divided by 2 to only scale it on the right/top respectively
+        BoundingBox.transform.localScale += scaleChange;
+        BoundingBox.transform.position += positionChange;
+
+      //Left bounding box, to stop the player from falling off (left)
+      //Scales vertically from the amount of stairs that spawn
+        scaleChange = new Vector3(0f, (StairsCount * BB_Y), 0f);
+        positionChange = new Vector3(0f , (StairsCount * (BB_Y / 2)), 0f);
+        BB_Left.transform.localScale += scaleChange;
+        BB_Left.transform.position += positionChange;
+
+      //Right bounding box, to stop the player from falling off (right)
+      //Scales vertically from the amount of stairs that spawn
+      //Moves horizontally to be at the end of the level
+        scaleChange = new Vector3(0f, (StairsCount * BB_Y), 0f);
+        positionChange = new Vector3(((rounds * BB_X) + 2), (StairsCount * (BB_Y / 2)), 0f);
+        BB_Right.transform.localScale += scaleChange;
+        BB_Right.transform.position += positionChange;
     }
 
     // Start is called before the first frame update
