@@ -171,7 +171,7 @@ MonoBehaviour:
   BoundingBox: {fileID: 1989915155}
   BB_Left: {fileID: 1394168571}
   BB_Right: {fileID: 1561584012}
-  rounds: 5
+  rounds: 20
 --- !u!1 &204734406
 GameObject:
   m_ObjectHideFlags: 0
