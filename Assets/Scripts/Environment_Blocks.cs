@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public class Environment_Blocks : MonoBehaviour
@@ -19,9 +20,11 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject BB_Right;
     private Vector3 scaleChange, positionChange;
 
+    [SerializeField] private TMP_Text DialogueText;
+
     //Lists to track which blocks can be spawned
     List<string> PavementList = new List<string>() {"Pavement", "Road", "Stairs"};
-    List<string> RoadList = new List<string>() {"Pavement", "Bollard", "TrafficLights", "Stairs"};
+    List<string> RoadList = new List<string>() {"Pavement", "Bollard", "TrafficLights"};
     List<string> BollardList = new List<string>() {"Road"};
     List<string> TrafficLightList = new List<string>() {"Road"};
     List<string> StairsList = new List<string>() {"Pavement"};
@@ -51,7 +54,7 @@ public class Environment_Blocks : MonoBehaviour
           break;
 
           case "Road":
-          block_num = Random.Range(0, 4); //includes stairs for testing
+          block_num = Random.Range(0, 3);
           Spawn_Choice = RoadList[block_num];
           break;
 

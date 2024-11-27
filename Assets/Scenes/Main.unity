@@ -171,6 +171,7 @@ MonoBehaviour:
   BoundingBox: {fileID: 1989915155}
   BB_Left: {fileID: 1394168571}
   BB_Right: {fileID: 1561584012}
+  DialogueText: {fileID: 204734408}
   rounds: 20
 --- !u!1 &204734406
 GameObject:
@@ -184,7 +185,7 @@ GameObject:
   - component: {fileID: 204734409}
   - component: {fileID: 204734408}
   m_Layer: 5
-  m_Name: TestText
+  m_Name: DialogueText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -731,8 +732,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1438256323}
   - component: {fileID: 1438256324}
-  - component: {fileID: 1438256326}
   - component: {fileID: 1438256327}
+  - component: {fileID: 1438256328}
+  - component: {fileID: 1438256329}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -783,20 +785,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1438256326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438256322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d560a4fcf0b3e124aa63432338659683, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnvironmentGameObject: {fileID: 0}
-  textbox: {fileID: 204734408}
 --- !u!114 &1438256327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,6 +799,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Body: {fileID: 1438256324}
   moveSpeed: 15
+--- !u!114 &1438256328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438256322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d560a4fcf0b3e124aa63432338659683, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pavement_Prefab: {fileID: 6276866561324349375, guid: e49043c8dd42f0b4f8fd9acdeff23ef9, type: 3}
+  Road_Prefab: {fileID: 7773109776459581387, guid: 6c66130e1e6a99244aa6dd95d254f069, type: 3}
+  Stair_Prefab: {fileID: 7572063483543386491, guid: 2995ecf783436f640829958763c58227, type: 3}
+  Bollard_Prefab: {fileID: 7793592335823260199, guid: ab42a786c9810234c9d1103f5fa35183, type: 3}
+  TrafficLight_Prefab: {fileID: 5473524892290554457, guid: c6ac64ec868aa8449a01c52cefb6c5a4, type: 3}
+  DialogueText: {fileID: 204734408}
+--- !u!70 &1438256329
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438256322}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.5, y: 1}
+  m_Direction: 0
 --- !u!1 &1542274966
 GameObject:
   m_ObjectHideFlags: 3
