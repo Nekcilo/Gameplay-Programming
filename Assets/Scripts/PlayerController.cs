@@ -36,5 +36,6 @@ public class PlayerController: MonoBehaviour
         {
             Body.AddForce(new Vector2(moveHorizontal * moveSpeed, 0f), ForceMode2D.Impulse);
         }
+        Debug.Log("DOG:" + transform.position.y);
     }
 }
