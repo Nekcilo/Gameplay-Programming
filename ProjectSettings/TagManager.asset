@@ -9,6 +9,10 @@ TagManager:
   - Stairs
   - Bollard
   - TrafficLights
+  - PavementCol
+  - RoadCol
+  - TLCol
+  - StairsCol
   layers:
   - Default
   - TransparentFX

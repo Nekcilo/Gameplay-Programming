@@ -20,8 +20,6 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject BB_Right;
     private Vector3 scaleChange, positionChange;
 
-    [SerializeField] private TMP_Text DialogueText;
-
     //Lists to track which blocks can be spawned
     List<string> PavementList = new List<string>() {"Pavement", "Road", "Stairs"};
     List<string> RoadList = new List<string>() {"Pavement", "Bollard", "TrafficLights"};

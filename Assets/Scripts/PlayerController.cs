@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController: MonoBehaviour
 {
     [SerializeField] Rigidbody2D Body;
+    [SerializeField] GameObject Human;
     public float moveSpeed;
     private float moveHorizontal;
     private bool left;
@@ -26,16 +27,18 @@ public class PlayerController: MonoBehaviour
         } 
         else
         {
-            moveSpeed = 15;
+            moveSpeed = 10;
         }
     }
 
     void FixedUpdate()
     {
-        if(Body.velocity.x < 5 && Body.velocity.x > -5)
+        /*if(Body.velocity.x < 5 && Body.velocity.x > -5)
         {
             Body.AddForce(new Vector2(moveHorizontal * moveSpeed, 0f), ForceMode2D.Impulse);
-        }
-        Debug.Log("DOG:" + transform.position.y);
+        }*/
+        transform.position = new Vector2(transform.position.x + (Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime), transform.position.y);
+        
+        Human.transform.position = new Vector2(transform.position.x - 0.5f, Human.transform.position.y);
     }
 }
