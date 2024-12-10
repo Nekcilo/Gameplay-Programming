@@ -8,6 +8,7 @@ public class Dialogue : MonoBehaviour
 {
     [SerializeField] TMP_Text BlockText;
     [SerializeField] TMP_Text CommandText;
+    [SerializeField] TextMeshProUGUI DebugText;
 
     //COLOURS
     Color Red = new Color32(237, 128, 153, 255); //RGBA
@@ -16,6 +17,35 @@ public class Dialogue : MonoBehaviour
     Color Blue = new Color32(77, 155, 230, 255); //RGBA
     Color Purple = new Color32(168, 132, 243, 255); //RGBA
     Color Pink = new Color32(240, 79, 120, 255); //RGBA
+
+    bool Trigger = false;
+    float Secs;
+
+    void Awake()
+    {
+
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Secs = 0f;
+        Trigger = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Trigger == true)
+        {
+            Secs -= Time.deltaTime;
+            DebugText.SetText((System.Math.Truncate(Secs)).ToString());
+            if (Secs <= 0)
+            {
+                Trigger = false;
+            }
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collision2D)
     {
@@ -86,6 +116,10 @@ public class Dialogue : MonoBehaviour
                 CommandText.color = new Color32(255, 255, 255, 255);
                 CommandText.outlineWidth = 0.2f;
                 CommandText.outlineColor = new Color32(0, 0, 0, 255);
+                
+                Secs = Random.Range(1, 5); //1 to 5
+                Trigger = true; //RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+                Debug.Log("raaahahhhhfdhfsbjhsabfjhd");
 
                 CommandText.SetText("Go");
             }
@@ -151,22 +185,5 @@ public class Dialogue : MonoBehaviour
             CommandText.color = new Color32(255, 255, 255, 0); //Opacity 0
             CommandText.outlineColor = new Color32(0, 0, 0, 0); //Opacity 0
         }
-    }
-
-    void Awake()
-    {
-
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
