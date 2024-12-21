@@ -1094,6 +1094,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6557007983853319197}
   - component: {fileID: 4287060515413230262}
+  - component: {fileID: 6079160087170348181}
   m_Layer: 0
   m_Name: Lights
   m_TagString: Untagged
@@ -1170,6 +1171,28 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6079160087170348181
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6514001045141701256}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c811351a29b23a74aa72aa7ee21e5a1f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6673553841360190759
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,7 +1423,7 @@ GameObject:
   - component: {fileID: 5730783202751393459}
   - component: {fileID: 2212787108013598255}
   m_Layer: 0
-  m_Name: Lights
+  m_Name: StaticLights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
