@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Random = UnityEngine.Random;
+using Unity.Collections;
 
 public class Dialogue : MonoBehaviour
 {
     [SerializeField] TMP_Text BlockText;
     [SerializeField] TMP_Text CommandText;
     [SerializeField] TextMeshProUGUI DebugText;
+    Animator TL_Anim;
+    public GameObject[] AnimArray;
+    int x = 0;
 
     //COLOURS
     Color Red = new Color32(237, 128, 153, 255); //RGBA
@@ -54,18 +58,25 @@ public class Dialogue : MonoBehaviour
                 if (PavementBool == true)
                 {
                     CommandText.SetText("Go"); //Sets text to go once timer is finished, if pavementbool is true
+                    PavementBool = false;
                 }
                 if (RoadBool == true)
                 {
                    CommandText.SetText("Cross"); //Sets text to cross once timer is finished, if roadbool is true
+                   RoadBool = false;
                 }
-                /*if (TLBool == true)
+                if (TLBool == true)
                 {
                    CommandText.SetText("Cross"); //Sets text to cross once timer is finished, if tlbool is true
-                }*/
+                   TLBool = false;
+                   TL_Anim.SetBool("IsTriggered", false);
+                   Debug.Log("THE ANIMATION SHOULD NOW BE RESET");
+                   x++;
+                }
                 if (StairsBool == true)
                 {
-                   CommandText.SetText("Stairs"); //Sets text to stairs once timer is finished, if stairsbool is true 
+                   CommandText.SetText("Stairs"); //Sets text to stairs once timer is finished, if stairsbool is true
+                   StairsBool = false;
                 }
             }
         }
@@ -139,6 +150,9 @@ public class Dialogue : MonoBehaviour
 
         if (collision2D.gameObject.tag == "TrafficLights")
         {
+            AnimArray = GameObject.FindGameObjectsWithTag("TLLights"); //.GetComponent<Animator>()
+            TL_Anim = AnimArray[x].GetComponent<Animator>();
+
             //Hides previous command text on new block entered
             CommandText.color = new Color32(255, 255, 255, 0);
             CommandText.outlineWidth = 0.2f;
@@ -211,14 +225,17 @@ public class Dialogue : MonoBehaviour
         //TRAFFIC LIGHTS - Stop, Wait (for light sprite to change), Cross
         if (collision2D.gameObject.tag == "TLCol")
         {
+            TL_Anim.SetBool("IsTriggered", true);
+
             Debug.Log("Stop (Traffic Lights)");
             CommandText.color = Purple;
             CommandText.outlineWidth = 0.2f;
             CommandText.outlineColor = new Color32(0, 0, 0, 255);
 
-            //CommandText.SetText("Wait"); //Needs different code to wait for the animation to finish
-
-            //TLBool = true;
+            Secs = 3; //Matches the length of the lights animation
+            Trigger = true; //Sets the timer to count down
+            Debug.Log("Timer Started");
+            TLBool = true;
         }
         /*else
         {
