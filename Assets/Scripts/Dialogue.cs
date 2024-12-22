@@ -30,6 +30,32 @@ public class Dialogue : MonoBehaviour
     bool TLBool = false;
     bool StairsBool = false;
 
+    /*public delegate void RoundCountDelegate();
+    public event RoundCountDelegate RoundIncrease;
+    public static int RoundCounter;*/
+
+    /*//FOR THE SAKE OF TESTING
+    //BoundingBox to stop player going backwards
+    [SerializeField] private GameObject Player_BB;
+    int RoundCounter = 0;
+    int StairsCount = 10;
+    float X_Constant = 5f;
+    float Y_Constant = 2.24f;
+    private Vector3 scaleChange, positionChange;*/
+
+    /*void Scaling()
+    {
+        RoundCounter++;
+        //Bounding Box to 'follow' behind the player, stops them from going backwards
+        //Scales horizontally with the level blocks, scales vertically from the amount of stairs that spawn
+        //Moves Horizontally to be centred with the level
+        scaleChange = new Vector3(((RoundCounter - 1) * X_Constant), (StairsCount * Y_Constant), 0f);
+        positionChange = new Vector3(((RoundCounter - 1) * (X_Constant / 2)), (StairsCount * (Y_Constant / 2)), 0f); //has to be divided by 2 to only scale it on the right/top respectively
+        Player_BB.transform.localScale += scaleChange;
+        Player_BB.transform.position += positionChange;  
+    }*/
+
+
     void Awake()
     {
 
@@ -85,7 +111,9 @@ public class Dialogue : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision2D)
     {
         if (collision2D.gameObject.tag == "Pavement")
-        {
+        {   
+            //Scaling();
+
             //Hides previous command text on new block entered
             CommandText.color = new Color32(255, 255, 255, 0);
             CommandText.outlineWidth = 0.2f;
@@ -102,6 +130,8 @@ public class Dialogue : MonoBehaviour
 
         if (collision2D.gameObject.tag == "Road")
         {
+            //Scaling();
+
             //Hides previous command text on new block entered
             CommandText.color = new Color32(255, 255, 255, 0);
             CommandText.outlineWidth = 0.2f;
@@ -118,6 +148,8 @@ public class Dialogue : MonoBehaviour
 
         if (collision2D.gameObject.tag == "Stairs")
         {
+            //Scaling();
+
             //Hides previous command text on new block entered
             CommandText.color = new Color32(255, 255, 255, 0);
             CommandText.outlineWidth = 0.2f;
@@ -134,6 +166,8 @@ public class Dialogue : MonoBehaviour
 
         if (collision2D.gameObject.tag == "Bollard")
         {
+            //Scaling();
+
             //Hides previous command text on new block entered
             CommandText.color = new Color32(255, 255, 255, 0);
             CommandText.outlineWidth = 0.2f;
@@ -150,6 +184,8 @@ public class Dialogue : MonoBehaviour
 
         if (collision2D.gameObject.tag == "TrafficLights")
         {
+            //Scaling();
+
             AnimArray = GameObject.FindGameObjectsWithTag("TLLights"); //.GetComponent<Animator>()
             TL_Anim = AnimArray[x].GetComponent<Animator>();
 

@@ -20,6 +20,11 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject BB_Right;
     private Vector3 scaleChange, positionChange;
 
+    //BoundingBox to stop player going backwards
+    [SerializeField] private GameObject Player_BB;
+    int RoundCounter;
+    //private Dialogue RoundCount;
+
     //Lists to track which blocks can be spawned
     List<string> PavementList = new List<string>() {"Pavement", "Road", "Stairs"};
     List<string> RoadList = new List<string>() {"Pavement", "Bollard", "TrafficLights"};
@@ -134,16 +139,24 @@ public class Environment_Blocks : MonoBehaviour
         BB_Right.transform.localScale += scaleChange;
         BB_Right.transform.position += positionChange;
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
       Spawn();  
+
+      //RoundCount = FindAnyObjectByType<Dialogue>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+      //RoundCount.RoundIncrease += RoundIncrease;       
     }
+
+    /*void RoundIncrease()
+    {
+      Debug.Log("ROUND COUNTER:" + Dialogue.RoundCounter);
+    }*/
 }
