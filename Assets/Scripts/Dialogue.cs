@@ -7,12 +7,15 @@ using Unity.Collections;
 
 public class Dialogue : MonoBehaviour
 {
+    //TMP_Text References
     [SerializeField] TMP_Text BlockText;
     [SerializeField] TMP_Text CommandText;
     [SerializeField] TextMeshProUGUI DebugText;
+
+    //Information for the TrafficLight Animation
     Animator TL_Anim;
     public GameObject[] AnimArray;
-    int x = 0;
+    int TLCount = 0;
 
     //COLOURS
     Color Red = new Color32(237, 128, 153, 255); //RGBA
@@ -24,7 +27,6 @@ public class Dialogue : MonoBehaviour
 
     bool Trigger = false;
     float Secs;
-
     bool PavementBool = false;
     bool RoadBool = false;
     bool TLBool = false;
@@ -42,14 +44,41 @@ public class Dialogue : MonoBehaviour
         CommandText.outlineColor = new Color32(0, 0, 0, 0);
     }
 
-    void TextOutline()
+    void BlockTextOutline()
     {
         BlockText.outlineWidth = 0.2f;
         BlockText.outlineColor = new Color32(255, 255, 255, 255);
     }
-    void Awake()
-    {
 
+    void CommandTextOutline()
+    {
+        CommandText.outlineWidth = 0.2f;
+        CommandText.outlineColor = new Color32(0, 0, 0, 255);
+    }
+
+    void Timer()
+    {
+        if(TLBool == true)
+        {
+            Secs = 2.5f;
+            Debug.Log("Timer Length:" + Secs);
+            Trigger = true; //Sets the timer to count down
+            Debug.Log("Timer Started");
+        }
+        if(StairsBool == true)
+        {
+            Secs = 3;
+            Debug.Log("Timer Length:" + Secs);
+            Trigger = true; //Sets the timer to count down
+            Debug.Log("Timer Started");
+        }
+        else if (PavementBool == true || RoadBool == true)
+        {
+            Secs = Random.Range(1, 5); //1 to 5
+            Debug.Log("RANDOM Timer Length:" + Secs);
+            Trigger = true; //Sets the timer to count down
+            Debug.Log("Timer Started");
+        }
     }
 
     // Start is called before the first frame update
@@ -88,7 +117,7 @@ public class Dialogue : MonoBehaviour
                    TLBool = false;
                    TL_Anim.SetBool("IsTriggered", false);
                    Debug.Log("THE ANIMATION SHOULD NOW BE RESET");
-                   x++;
+                   TLCount++;
                 }
                 if (StairsBool == true)
                 {
@@ -106,7 +135,7 @@ public class Dialogue : MonoBehaviour
             TextReset();
 
             BlockText.color = Pink;
-            TextOutline();
+            BlockTextOutline();
 
             BlockText.SetText("Pavement");
         }
@@ -116,7 +145,7 @@ public class Dialogue : MonoBehaviour
             TextReset();
 
             BlockText.color = Orange;
-            TextOutline();
+            BlockTextOutline();
 
             BlockText.SetText("Road");
         }
@@ -126,7 +155,7 @@ public class Dialogue : MonoBehaviour
             TextReset();
 
             BlockText.color = Green;
-            TextOutline();
+            BlockTextOutline();
 
             BlockText.SetText("Stairs");
         }
@@ -136,20 +165,20 @@ public class Dialogue : MonoBehaviour
             TextReset();
 
             BlockText.color = Blue;
-            TextOutline();
+            BlockTextOutline();
 
             BlockText.SetText("Bollard");
         }
 
         if (collision2D.gameObject.tag == "TrafficLights")
         {
-            AnimArray = GameObject.FindGameObjectsWithTag("TLLights"); //.GetComponent<Animator>()
-            TL_Anim = AnimArray[x].GetComponent<Animator>();
+            AnimArray = GameObject.FindGameObjectsWithTag("TLLights"); //The animation looks better when this code is here
+            TL_Anim = AnimArray[TLCount].GetComponent<Animator>();
 
             TextReset();
 
             BlockText.color = Purple;
-            TextOutline();
+            BlockTextOutline();
 
             BlockText.SetText("Traffic Lights");
         }
@@ -164,51 +193,33 @@ public class Dialogue : MonoBehaviour
             {
                 //Debug.Log("Print Go (Pavement)");
                 CommandText.color = Pink;
-                CommandText.outlineWidth = 0.2f;
-                CommandText.outlineColor = new Color32(0, 0, 0, 255);
+                CommandTextOutline();
                 
-                Secs = Random.Range(1, 5); //1 to 5
-                Debug.Log(Secs);
-                Trigger = true; //Sets the timer to count down
-                Debug.Log("Timer Started");
-                CommandText.SetText("Wait");
-
                 PavementBool = true;
+                Timer();
+                CommandText.SetText("Wait");
 
             }
             else if (Random.Range(1, 3) == 2) // 1 or 2
             {
                 Debug.Log("Print Nothing (Pavement)");
-                CommandText.color = new Color32(255, 255, 255, 0); //Opacity 0
-                CommandText.outlineColor = new Color32(0, 0, 0, 0); //Opacity 0
                 CommandText.SetText("[Do Nothing]");
+                TextReset();
             }   
         }       
-
 
         //ROAD + BOLLARD - Stop, Wait (2-5 Seconds, Random), Cross
         if (collision2D.gameObject.tag == "RoadCol")
         {
             Debug.Log("Stop (Road/Bollard)");
             CommandText.color = Orange;
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 255);
-
-            Secs = Random.Range(1, 5); //1 to 5
-            Trigger = true; //Sets the timer to count down
-            Debug.Log("Timer Started");
-            CommandText.SetText("Wait");
+            CommandTextOutline();
 
             RoadBool = true;
+            Timer();
+            CommandText.SetText("Wait");
         }
-        /*else
-        {
-            Debug.Log("Disabled (Road/Bollard)");
-            CommandText.color = new Color32(255, 255, 255, 0); //Opacity 0
-            CommandText.outlineColor = new Color32(0, 0, 0, 0); //Opacity 0
-        }*/
-
-
+ 
         //TRAFFIC LIGHTS - Stop, Wait (for light sprite to change), Cross
         if (collision2D.gameObject.tag == "TLCol")
         {
@@ -216,42 +227,23 @@ public class Dialogue : MonoBehaviour
 
             Debug.Log("Stop (Traffic Lights)");
             CommandText.color = Purple;
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 255);
+            CommandTextOutline();
 
-            Secs = 3; //Matches the length of the lights animation
-            Trigger = true; //Sets the timer to count down
-            Debug.Log("Timer Started");
             TLBool = true;
+            Timer();
         }
-        /*else
-        {
-            Debug.Log("Disabled (Traffic Lights)");
-            CommandText.color = new Color32(255, 255, 255, 0); //Opacity 0
-            CommandText.outlineColor = new Color32(0, 0, 0, 0); //Opacity 0
-        }*/
-
 
         //STAIRS - Stop, Stairs
         if (collision2D.gameObject.tag == "StairsCol")
         {
             Debug.Log("Stop (Stairs)");
             CommandText.color = Green;
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 255);
-
-            Secs = 3; //Stairs will alwasys need a 3 second wait
-            Trigger = true; //Sets the timer to count down
-            Debug.Log("Timer Started");
-            CommandText.SetText("Stop");
+            CommandTextOutline();
 
             StairsBool = true;
+            Timer();
+            CommandText.SetText("Stop");
+
         }
-        /*else
-        {
-            Debug.Log("Disabled (Stairs)");
-            CommandText.color = new Color32(255, 255, 255, 0); //Opacity 0
-            CommandText.outlineColor = new Color32(0, 0, 0, 0); //Opacity 0
-        }*/
     }
 }

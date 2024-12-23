@@ -20,11 +20,6 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject BB_Right;
     private Vector3 scaleChange, positionChange;
 
-    //BoundingBox to stop player going backwards
-    [SerializeField] private GameObject Player_BB;
-    int RoundCounter;
-    //private Dialogue RoundCount;
-
     //Lists to track which blocks can be spawned
     List<string> PavementList = new List<string>() {"Pavement", "Road", "Stairs"};
     List<string> RoadList = new List<string>() {"Pavement", "Bollard", "TrafficLights"};
@@ -43,6 +38,42 @@ public class Environment_Blocks : MonoBehaviour
     string Previous = "Pavement";
     string Spawn_Choice;
     
+    void CameraBoundingBox()
+    {
+      //Main BoundingBox, To stop the camera
+      //Scales horizontally with the level blocks, scales vertically from the amount of stairs that spawn
+      //Moves Horizontally to be centred with the level
+      scaleChange = new Vector3(((rounds - 1) * X_Constant), (StairsCount * Y_Constant), 0f);
+      positionChange = new Vector3(((rounds - 1) * (X_Constant / 2)), (StairsCount * (Y_Constant / 2)), 0f); //has to be divided by 2 to only scale it on the right/top respectively
+      BoundingBox.transform.localScale += scaleChange;
+      BoundingBox.transform.position += positionChange;
+    }
+
+    void LeftBoundingBox()
+    {
+      //Left bounding box, to stop the player from falling off (left)
+      //Scales vertically from the amount of stairs that spawn
+      scaleChange = new Vector3(0f, (StairsCount * Y_Constant), 0f);
+      positionChange = new Vector3(0f , (StairsCount * (Y_Constant / 2)), 0f);
+      BB_Left.transform.localScale += scaleChange;
+      BB_Left.transform.position += positionChange;
+    }
+    void RightBoundingBox()
+    {
+      //Right bounding box, to stop the player from falling off (right)
+      //Scales vertically from the amount of stairs that spawn
+      //Moves horizontally to be at the end of the level
+      scaleChange = new Vector3(0f, (StairsCount * Y_Constant), 0f);
+      positionChange = new Vector3(((rounds * X_Constant) + 2), (StairsCount * (Y_Constant / 2)), 0f);
+      BB_Right.transform.localScale += scaleChange;
+      BB_Right.transform.position += positionChange;
+    }
+
+    void TriggerEndBox()
+    {
+      //code here
+    }
+
     public void Spawn()
     {
       for (int i = 1; i < rounds;) //C# alt to 'for i in range'
@@ -116,47 +147,24 @@ public class Environment_Blocks : MonoBehaviour
         Previous = Spawn_Choice;
         i++;
       }
-      //Main BoundingBox, To stop the camera
-      //Scales horizontally with the level blocks, scales vertically from the amount of stairs that spawn
-      //Moves Horizontally to be centred with the level
-        scaleChange = new Vector3(((rounds - 1) * X_Constant), (StairsCount * Y_Constant), 0f);
-        positionChange = new Vector3(((rounds - 1) * (X_Constant / 2)), (StairsCount * (Y_Constant / 2)), 0f); //has to be divided by 2 to only scale it on the right/top respectively
-        BoundingBox.transform.localScale += scaleChange;
-        BoundingBox.transform.position += positionChange;
 
-      //Left bounding box, to stop the player from falling off (left)
-      //Scales vertically from the amount of stairs that spawn
-        scaleChange = new Vector3(0f, (StairsCount * Y_Constant), 0f);
-        positionChange = new Vector3(0f , (StairsCount * (Y_Constant / 2)), 0f);
-        BB_Left.transform.localScale += scaleChange;
-        BB_Left.transform.position += positionChange;
+      CameraBoundingBox();
 
-      //Right bounding box, to stop the player from falling off (right)
-      //Scales vertically from the amount of stairs that spawn
-      //Moves horizontally to be at the end of the level
-        scaleChange = new Vector3(0f, (StairsCount * Y_Constant), 0f);
-        positionChange = new Vector3(((rounds * X_Constant) + 2), (StairsCount * (Y_Constant / 2)), 0f);
-        BB_Right.transform.localScale += scaleChange;
-        BB_Right.transform.position += positionChange;
+      LeftBoundingBox();
+
+      RightBoundingBox();
+
     }
     
     // Start is called before the first frame update
     void Start()
     {
       Spawn();  
-
-      //RoundCount = FindAnyObjectByType<Dialogue>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-      //RoundCount.RoundIncrease += RoundIncrease;       
-    }
 
-    /*void RoundIncrease()
-    {
-      Debug.Log("ROUND COUNTER:" + Dialogue.RoundCounter);
-    }*/
+    } 
 }
