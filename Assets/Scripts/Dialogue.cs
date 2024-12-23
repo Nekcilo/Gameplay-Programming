@@ -34,28 +34,19 @@ public class Dialogue : MonoBehaviour
     public event RoundCountDelegate RoundIncrease;
     public static int RoundCounter;*/
 
-    /*//FOR THE SAKE OF TESTING
-    //BoundingBox to stop player going backwards
-    [SerializeField] private GameObject Player_BB;
-    int RoundCounter = 0;
-    int StairsCount = 10;
-    float X_Constant = 5f;
-    float Y_Constant = 2.24f;
-    private Vector3 scaleChange, positionChange;*/
-
-    /*void Scaling()
+    void TextReset()
     {
-        RoundCounter++;
-        //Bounding Box to 'follow' behind the player, stops them from going backwards
-        //Scales horizontally with the level blocks, scales vertically from the amount of stairs that spawn
-        //Moves Horizontally to be centred with the level
-        scaleChange = new Vector3(((RoundCounter - 1) * X_Constant), (StairsCount * Y_Constant), 0f);
-        positionChange = new Vector3(((RoundCounter - 1) * (X_Constant / 2)), (StairsCount * (Y_Constant / 2)), 0f); //has to be divided by 2 to only scale it on the right/top respectively
-        Player_BB.transform.localScale += scaleChange;
-        Player_BB.transform.position += positionChange;  
-    }*/
+        //Hides previous command text on new block entered
+        CommandText.color = new Color32(255, 255, 255, 0);
+        CommandText.outlineWidth = 0.2f;
+        CommandText.outlineColor = new Color32(0, 0, 0, 0);
+    }
 
-
+    void TextOutline()
+    {
+        BlockText.outlineWidth = 0.2f;
+        BlockText.outlineColor = new Color32(255, 255, 255, 255);
+    }
     void Awake()
     {
 
@@ -112,93 +103,53 @@ public class Dialogue : MonoBehaviour
     {
         if (collision2D.gameObject.tag == "Pavement")
         {   
-            //Scaling();
-
-            //Hides previous command text on new block entered
-            CommandText.color = new Color32(255, 255, 255, 0);
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 0);
-
-            //Debug.Log("Player has entered a Pavement block");
+            TextReset();
 
             BlockText.color = Pink;
-            BlockText.outlineWidth = 0.2f;
-            BlockText.outlineColor = new Color32(255, 255, 255, 255);
+            TextOutline();
 
             BlockText.SetText("Pavement");
         }
 
         if (collision2D.gameObject.tag == "Road")
         {
-            //Scaling();
-
-            //Hides previous command text on new block entered
-            CommandText.color = new Color32(255, 255, 255, 0);
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 0);
-
-            //Debug.Log("Player has entered a Road block");
+            TextReset();
 
             BlockText.color = Orange;
-            BlockText.outlineWidth = 0.2f;
-            BlockText.outlineColor = new Color32(255, 255, 255, 255);
+            TextOutline();
 
             BlockText.SetText("Road");
         }
 
         if (collision2D.gameObject.tag == "Stairs")
         {
-            //Scaling();
-
-            //Hides previous command text on new block entered
-            CommandText.color = new Color32(255, 255, 255, 0);
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 0);
-
-            //Debug.Log("Player has entered a Stair block");
+            TextReset();
 
             BlockText.color = Green;
-            BlockText.outlineWidth = 0.2f;
-            BlockText.outlineColor = new Color32(255, 255, 255, 255);
+            TextOutline();
 
             BlockText.SetText("Stairs");
         }
 
         if (collision2D.gameObject.tag == "Bollard")
         {
-            //Scaling();
-
-            //Hides previous command text on new block entered
-            CommandText.color = new Color32(255, 255, 255, 0);
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 0);
-
-            //Debug.Log("Player has entered a Bollard block");
+            TextReset();
 
             BlockText.color = Blue;
-            BlockText.outlineWidth = 0.2f;
-            BlockText.outlineColor = new Color32(255, 255, 255, 255);
+            TextOutline();
 
             BlockText.SetText("Bollard");
         }
 
         if (collision2D.gameObject.tag == "TrafficLights")
         {
-            //Scaling();
-
             AnimArray = GameObject.FindGameObjectsWithTag("TLLights"); //.GetComponent<Animator>()
             TL_Anim = AnimArray[x].GetComponent<Animator>();
 
-            //Hides previous command text on new block entered
-            CommandText.color = new Color32(255, 255, 255, 0);
-            CommandText.outlineWidth = 0.2f;
-            CommandText.outlineColor = new Color32(0, 0, 0, 0);
-
-            //Debug.Log("Player has entered a Traffic Light block");
+            TextReset();
 
             BlockText.color = Purple;
-            BlockText.outlineWidth = 0.2f;
-            BlockText.outlineColor = new Color32(255, 255, 255, 255);
+            TextOutline();
 
             BlockText.SetText("Traffic Lights");
         }

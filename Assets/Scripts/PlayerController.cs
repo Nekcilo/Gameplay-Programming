@@ -22,7 +22,6 @@ public class PlayerController: MonoBehaviour
         moveHorizontal = Input.GetAxisRaw("Horizontal"); 
         if (Input.GetAxisRaw("Horizontal") > -1.5 && Input.GetAxisRaw("Horizontal") < 0)
         {
-            Debug.Log("Left");
             moveSpeed = 1;
         } 
         else
