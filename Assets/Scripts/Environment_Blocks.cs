@@ -14,11 +14,14 @@ public class Environment_Blocks : MonoBehaviour
     [SerializeField] private GameObject Bollard_Prefab;
     [SerializeField] private GameObject TrafficLight_Prefab;
 
-    //BoundingBox References
+    //Bounding Box References
     [SerializeField] private GameObject BoundingBox;
     [SerializeField] private GameObject BB_Left;
     [SerializeField] private GameObject BB_Right;
     private Vector3 scaleChange, positionChange;
+
+    //End Trigger Box References
+    [SerializeField] private GameObject EndTrigger;
 
     //Lists to track which blocks can be spawned
     List<string> PavementList = new List<string>() {"Pavement", "Road", "Stairs"};
@@ -69,9 +72,12 @@ public class Environment_Blocks : MonoBehaviour
       BB_Right.transform.position += positionChange;
     }
 
-    void TriggerEndBox()
+    void EndTriggerBox()
     {
-      //code here
+      //Trigger End Box, will trigger the score screen to display
+      //Moves horizontally to be at the end of the level
+      positionChange = new Vector3(((rounds * X_Constant) + 5.2f), ((StairsCount * (Y_Constant)) + 1), 0f);
+      EndTrigger.transform.position += positionChange;
     }
 
     public void Spawn()
@@ -147,13 +153,22 @@ public class Environment_Blocks : MonoBehaviour
         Previous = Spawn_Choice;
         i++;
       }
-
-      CameraBoundingBox();
-
+      
       LeftBoundingBox();
 
-      RightBoundingBox();
-
+      if (Spawn_Choice == "Stairs")
+      {
+        X_Constant = 18.145f;
+        RightBoundingBox();
+        EndTriggerBox();
+        CameraBoundingBox();
+      }
+      else
+      {
+        RightBoundingBox();
+        EndTriggerBox();
+        CameraBoundingBox();
+      }
     }
     
     // Start is called before the first frame update
