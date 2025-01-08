@@ -1273,6 +1273,8 @@ MonoBehaviour:
   DebugText: {fileID: 1997601132}
   AnimArray: []
   TestString: FUCK SHIT FUCK SHIT BALLS :)
+  GoodScore: 0
+  BadScore: 0
 --- !u!114 &1438256329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1299,6 +1301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueScript: {fileID: 1438256328}
+  EndTriggerBox: {fileID: 1945124691}
 --- !u!1 &1498720955
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,6 +36,8 @@ public class Dialogue : MonoBehaviour
     bool PlayerMoved = false;
     bool TriggerEnd = false;
     public string TestString = "FUCK SHIT FUCK SHIT BALLS :)";
+    public int GoodScore = 0;
+    public int BadScore = 0;
 
     void MovingCheck()
     {
@@ -158,11 +160,13 @@ public class Dialogue : MonoBehaviour
                 if (PlayerMoved == true)
                 {
                     Debug.Log("BAD SCORE");
+                    BadScore++;
                     PlayerMoved = false;
                 }
                 else if (PlayerMoved == false)
                 {
                     Debug.Log("GOOD SCORE");
+                    GoodScore++;
                 }
 
                 TriggerEnd = true;
@@ -173,7 +177,8 @@ public class Dialogue : MonoBehaviour
         {
             if (IsMoving == true)
             {
-                //+ score
+                Debug.Log("GOOD SCORE");
+                GoodScore++;
                 TriggerEnd = false;
             }
         }
