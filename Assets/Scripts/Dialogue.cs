@@ -35,6 +35,7 @@ public class Dialogue : MonoBehaviour
     bool IsMoving = false;
     bool PlayerMoved = false;
     bool TriggerEnd = false;
+    public string TestString = "FUCK SHIT FUCK SHIT BALLS :)";
 
     void MovingCheck()
     {

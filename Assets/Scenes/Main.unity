@@ -1190,6 +1190,7 @@ GameObject:
   - component: {fileID: 1438256327}
   - component: {fileID: 1438256328}
   - component: {fileID: 1438256329}
+  - component: {fileID: 1438256330}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Untagged
@@ -1271,6 +1272,7 @@ MonoBehaviour:
   CommandText: {fileID: 756607588}
   DebugText: {fileID: 1997601132}
   AnimArray: []
+  TestString: FUCK SHIT FUCK SHIT BALLS :)
 --- !u!114 &1438256329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1284,6 +1286,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player_BB: {fileID: 952566138}
+--- !u!114 &1438256330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1438256322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c693f21b5debe6f4994c92752f3ce95a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueScript: {fileID: 1438256328}
 --- !u!1 &1498720955
 GameObject:
   m_ObjectHideFlags: 0
