@@ -32,9 +32,17 @@ public class Dialogue : MonoBehaviour
     bool TLBool = false;
     bool StairsBool = false;
 
-    /*public delegate void RoundCountDelegate();
-    public event RoundCountDelegate RoundIncrease;
-    public static int RoundCounter;*/
+    void IsMoving()
+    {
+        if (Input.GetAxisRaw("Horizontal") <= 0)
+        {
+            Debug.Log("Stopped");
+        } 
+        else if (Input.GetAxisRaw("Horizontal") > 0)
+        {
+            Debug.Log("Moving");
+        }
+    }
 
     void TextReset()
     {
@@ -91,6 +99,8 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        IsMoving();
+
         if (Trigger == true)
         {
             DebugText.SetText((System.Math.Truncate(Secs)).ToString());
