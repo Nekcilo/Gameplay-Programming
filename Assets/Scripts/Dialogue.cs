@@ -27,20 +27,24 @@ public class Dialogue : MonoBehaviour
 
     bool Trigger = false;
     float Secs;
+    float FixedSecs;
     bool PavementBool = false;
     bool RoadBool = false;
     bool TLBool = false;
     bool StairsBool = false;
+    bool IsMoving = false;
+    bool PlayerMoved = false;
+    bool TriggerEnd = false;
 
-    void IsMoving()
+    void MovingCheck()
     {
         if (Input.GetAxisRaw("Horizontal") <= 0)
         {
-            Debug.Log("Stopped");
+            IsMoving = false;
         } 
         else if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            Debug.Log("Moving");
+            IsMoving = true;
         }
     }
 
@@ -87,6 +91,8 @@ public class Dialogue : MonoBehaviour
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
+        FixedSecs = Secs - 0.3f;
+        Debug.Log("FixedSecs Lenght:" + FixedSecs);
     }
 
     // Start is called before the first frame update
@@ -99,12 +105,25 @@ public class Dialogue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        IsMoving();
+        MovingCheck();
 
         if (Trigger == true)
         {
+            //Makes the timer count down in whole numbers
             DebugText.SetText((System.Math.Truncate(Secs)).ToString());
+            //Timer Counting Down
             Secs -= Time.deltaTime;
+
+            //Checks if the player moved at all during the timer
+            if (Secs < FixedSecs) 
+            {
+                if (IsMoving == true)
+                {
+                    PlayerMoved = true;
+                }
+            }
+
+            //After timer has finished:
             if (Secs <= 0)
             {
                 Trigger = false;
@@ -134,6 +153,27 @@ public class Dialogue : MonoBehaviour
                    CommandText.SetText("Stairs"); //Sets text to stairs once timer is finished, if stairsbool is true
                    StairsBool = false;
                 }
+
+                if (PlayerMoved == true)
+                {
+                    Debug.Log("BAD SCORE");
+                    PlayerMoved = false;
+                }
+                else if (PlayerMoved == false)
+                {
+                    Debug.Log("GOOD SCORE");
+                }
+
+                TriggerEnd = true;
+            }
+        }
+
+        if (TriggerEnd == true)
+        {
+            if (IsMoving == true)
+            {
+                //+ score
+                TriggerEnd = false;
             }
         }
     }
