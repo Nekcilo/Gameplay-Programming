@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using Random = UnityEngine.Random;
 using Unity.Collections;
+using Unity.VisualScripting;
 
 public class Dialogue : MonoBehaviour
 {
@@ -32,12 +33,17 @@ public class Dialogue : MonoBehaviour
     bool RoadBool = false;
     bool TLBool = false;
     bool StairsBool = false;
+
+    //Movement Detection Variables
     bool IsMoving = false;
     bool PlayerMoved = false;
     bool TriggerEnd = false;
-    public string TestString = "FUCK SHIT FUCK SHIT BALLS :)";
+    bool MovementEvent = false;
+
+    //SCORING VARIABLES
     public int GoodScore = 0;
     public int BadScore = 0;
+    public int EventCount = 0;
 
     void MovingCheck()
     {
@@ -77,6 +83,7 @@ public class Dialogue : MonoBehaviour
         {
             Secs = 2.5f;
             Debug.Log("Timer Length:" + Secs);
+            MovementEvent = false;
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
@@ -84,6 +91,7 @@ public class Dialogue : MonoBehaviour
         {
             Secs = 3;
             Debug.Log("Timer Length:" + Secs);
+            MovementEvent = false;
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
@@ -91,6 +99,7 @@ public class Dialogue : MonoBehaviour
         {
             Secs = Random.Range(1, 5); //1 to 5
             Debug.Log("RANDOM Timer Length:" + Secs);
+            MovementEvent = false;
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
@@ -157,30 +166,59 @@ public class Dialogue : MonoBehaviour
                    StairsBool = false;
                 }
 
-                if (PlayerMoved == true)
+                if (MovementEvent == false)
                 {
-                    Debug.Log("BAD SCORE");
-                    BadScore++;
-                    PlayerMoved = false;
+                    if (PlayerMoved == true)
+                    {
+                        Debug.Log("BAD SCORE");
+                        BadScore++;
+                        PlayerMoved = false;
+                    }
+                    else if (PlayerMoved == false)
+                    {
+                        Debug.Log("GOOD SCORE");
+                        GoodScore++;
+                    }
                 }
-                else if (PlayerMoved == false)
+                else if (MovementEvent == true)
                 {
-                    Debug.Log("GOOD SCORE");
-                    GoodScore++;
+                    if (PlayerMoved == true)
+                    {
+                        Debug.Log("GOOD SCORE");
+                        GoodScore++;
+                    }
+                    else if (PlayerMoved == false)
+                    {
+                        Debug.Log("BAD SCORE");
+                        BadScore++;
+                        PlayerMoved = false;
+                    }
                 }
 
+                EventCount++;
                 TriggerEnd = true;
             }
         }
 
         if (TriggerEnd == true)
         {
-            if (IsMoving == true)
+            Secs = 2;
+            Trigger = true;
+            MovementEvent = true;
+            /*if (IsMoving == true)
             {
-                Debug.Log("GOOD SCORE");
+                Debug.Log("Movement GOOD SCORE");
                 GoodScore++;
                 TriggerEnd = false;
+                EventCount++;
             }
+            if (IsMoving == false)
+            {
+                Debug.Log("Movement BAD SCORE");
+                BadScore++;
+                TriggerEnd = false;
+                EventCount++;
+            }*/
         }
     }
 
@@ -255,6 +293,8 @@ public class Dialogue : MonoBehaviour
                 Timer();
                 CommandText.SetText("Wait");
 
+                EventCount++;
+
             }
             else if (Random.Range(1, 3) == 2) // 1 or 2
             {
@@ -274,6 +314,8 @@ public class Dialogue : MonoBehaviour
             RoadBool = true;
             Timer();
             CommandText.SetText("Wait");
+
+            EventCount++;
         }
  
         //TRAFFIC LIGHTS - Stop, Wait (for light sprite to change), Cross
@@ -287,6 +329,8 @@ public class Dialogue : MonoBehaviour
 
             TLBool = true;
             Timer();
+
+            EventCount++;
         }
 
         //STAIRS - Stop, Stairs
@@ -300,6 +344,7 @@ public class Dialogue : MonoBehaviour
             Timer();
             CommandText.SetText("Stop");
 
+            EventCount++;
         }
     }
 }
