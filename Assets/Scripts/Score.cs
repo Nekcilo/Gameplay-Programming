@@ -27,8 +27,14 @@ public class Score : MonoBehaviour
     {
         if (collision2D.gameObject == EndTriggerBox)
         {
+            //Debug Checks
+            Debug.Log("EventCount: " + dialogueScript.EventCount);
+            Debug.Log("GoodCount: " + dialogueScript.GoodScore);
+            Debug.Log("BadCount: " + dialogueScript.BadScore);
+
             MaxPossibleScore = dialogueScript.EventCount * 10;
             HalfThreshold = MaxPossibleScore/2;
+            Debug.Log("Half Threshold: " + HalfThreshold);
 
             dialogueScript.GoodScore = (dialogueScript.GoodScore * 10); //Each good point earnt = 10
             dialogueScript.BadScore = (dialogueScript.BadScore * 5); //Each bad point earnt = 5

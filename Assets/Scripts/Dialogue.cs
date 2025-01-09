@@ -40,6 +40,8 @@ public class Dialogue : MonoBehaviour
     bool TriggerEnd = false;
     bool MovementEvent = false;
 
+    float SecsButASecondTime = 1f;
+
     //SCORING VARIABLES
     public int GoodScore = 0;
     public int BadScore = 0;
@@ -104,7 +106,7 @@ public class Dialogue : MonoBehaviour
             Debug.Log("Timer Started");
         }
         FixedSecs = Secs - 0.3f;
-        Debug.Log("FixedSecs Lenght:" + FixedSecs);
+        Debug.Log("FixedSecs Length:" + FixedSecs);
     }
 
     // Start is called before the first frame update
@@ -166,7 +168,19 @@ public class Dialogue : MonoBehaviour
                    StairsBool = false;
                 }
 
-                if (MovementEvent == false)
+                if (PlayerMoved == true)
+                    {
+                        Debug.Log("BAD SCORE");
+                        BadScore++;
+                        PlayerMoved = false;
+                    }
+                    else if (PlayerMoved == false)
+                    {
+                        Debug.Log("GOOD SCORE");
+                        GoodScore++;
+                    }
+
+                /*if (MovementEvent == false)
                 {
                     if (PlayerMoved == true)
                     {
@@ -193,7 +207,7 @@ public class Dialogue : MonoBehaviour
                         BadScore++;
                         PlayerMoved = false;
                     }
-                }
+                }*/
 
                 EventCount++;
                 TriggerEnd = true;
@@ -202,10 +216,39 @@ public class Dialogue : MonoBehaviour
 
         if (TriggerEnd == true)
         {
-            Secs = 2;
-            Trigger = true;
-            MovementEvent = true;
-            /*if (IsMoving == true)
+            //Makes the timer count down in whole numbers
+            DebugText.SetText((System.Math.Truncate(SecsButASecondTime)).ToString());
+            //Timer Counting Down
+            SecsButASecondTime -= Time.deltaTime;
+
+            if (IsMoving == true)
+            {
+                PlayerMoved = true;
+            }
+
+            if (SecsButASecondTime <= 0)
+            {
+                if (PlayerMoved == true)
+                {
+                    Debug.Log("Movement GOOD SCORE");
+                    GoodScore++;
+                    TriggerEnd = false;  
+                    SecsButASecondTime = 1;
+                }
+                else if (PlayerMoved == false)
+                {
+                    Debug.Log("Movement BAD SCORE");
+                    BadScore++;
+                    TriggerEnd = false;
+                    SecsButASecondTime = 1;
+                }
+                EventCount++;
+                PlayerMoved = false;
+            }
+
+            /*//Trigger = true;
+            //MovementEvent = true;
+            if (IsMoving == true)
             {
                 Debug.Log("Movement GOOD SCORE");
                 GoodScore++;
@@ -293,8 +336,6 @@ public class Dialogue : MonoBehaviour
                 Timer();
                 CommandText.SetText("Wait");
 
-                EventCount++;
-
             }
             else if (Random.Range(1, 3) == 2) // 1 or 2
             {
@@ -314,8 +355,6 @@ public class Dialogue : MonoBehaviour
             RoadBool = true;
             Timer();
             CommandText.SetText("Wait");
-
-            EventCount++;
         }
  
         //TRAFFIC LIGHTS - Stop, Wait (for light sprite to change), Cross
@@ -329,8 +368,6 @@ public class Dialogue : MonoBehaviour
 
             TLBool = true;
             Timer();
-
-            EventCount++;
         }
 
         //STAIRS - Stop, Stairs
@@ -343,8 +380,6 @@ public class Dialogue : MonoBehaviour
             StairsBool = true;
             Timer();
             CommandText.SetText("Stop");
-
-            EventCount++;
         }
     }
 }
