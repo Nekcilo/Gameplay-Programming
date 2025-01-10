@@ -38,7 +38,6 @@ public class Dialogue : MonoBehaviour
     bool IsMoving = false;
     bool PlayerMoved = false;
     bool TriggerEnd = false;
-    bool MovementEvent = false;
 
     float SecsButASecondTime = 1f;
 
@@ -85,7 +84,6 @@ public class Dialogue : MonoBehaviour
         {
             Secs = 2.5f;
             Debug.Log("Timer Length:" + Secs);
-            MovementEvent = false;
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
@@ -93,7 +91,6 @@ public class Dialogue : MonoBehaviour
         {
             Secs = 3;
             Debug.Log("Timer Length:" + Secs);
-            MovementEvent = false;
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
@@ -101,7 +98,6 @@ public class Dialogue : MonoBehaviour
         {
             Secs = Random.Range(1, 5); //1 to 5
             Debug.Log("RANDOM Timer Length:" + Secs);
-            MovementEvent = false;
             Trigger = true; //Sets the timer to count down
             Debug.Log("Timer Started");
         }
@@ -180,35 +176,6 @@ public class Dialogue : MonoBehaviour
                         GoodScore++;
                     }
 
-                /*if (MovementEvent == false)
-                {
-                    if (PlayerMoved == true)
-                    {
-                        Debug.Log("BAD SCORE");
-                        BadScore++;
-                        PlayerMoved = false;
-                    }
-                    else if (PlayerMoved == false)
-                    {
-                        Debug.Log("GOOD SCORE");
-                        GoodScore++;
-                    }
-                }
-                else if (MovementEvent == true)
-                {
-                    if (PlayerMoved == true)
-                    {
-                        Debug.Log("GOOD SCORE");
-                        GoodScore++;
-                    }
-                    else if (PlayerMoved == false)
-                    {
-                        Debug.Log("BAD SCORE");
-                        BadScore++;
-                        PlayerMoved = false;
-                    }
-                }*/
-
                 EventCount++;
                 TriggerEnd = true;
             }
@@ -245,23 +212,6 @@ public class Dialogue : MonoBehaviour
                 EventCount++;
                 PlayerMoved = false;
             }
-
-            /*//Trigger = true;
-            //MovementEvent = true;
-            if (IsMoving == true)
-            {
-                Debug.Log("Movement GOOD SCORE");
-                GoodScore++;
-                TriggerEnd = false;
-                EventCount++;
-            }
-            if (IsMoving == false)
-            {
-                Debug.Log("Movement BAD SCORE");
-                BadScore++;
-                TriggerEnd = false;
-                EventCount++;
-            }*/
         }
     }
 
